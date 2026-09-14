@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { fetchFlights } from './api/flight-api';
 
+fetchFlights()
 </script>
 
 <template>
