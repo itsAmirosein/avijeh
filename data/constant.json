@@ -1,0 +1,99 @@
+{
+  "cdAddress": "https://cdn01.booking.ir/airlineLogo/{logo-name}.png",
+  "figmaAddress": "https://www.figma.com/design/LxlLxFW2ahjxXv9ZqdjzeP/avijeh-front-team-interview?node-id=1-3607&t=EGUJ4AkR8JgR9gRQ-0",
+  "itemPerPage": 20,
+  "cabinTypeList": {
+    "economy": {
+      "value": 3,
+      "title": "economyCabin"
+    },
+    "first": {
+      "value": 1,
+      "title": "firstClassCabin"
+    },
+    "business": {
+      "value": 2,
+      "title": "businessCabin"
+    },
+    "premium": {
+      "value": 4,
+      "title": "premiumCabin"
+    },
+    "premiumEconomy": {
+      "value": 16,
+      "title": "premiumEconomyCabin"
+    },
+    "comfort": {
+      "value": 32,
+      "title": "comfortCabin"
+    },
+    "economyPlus": {
+      "value": 64,
+      "title": "economyPlusCabin"
+    },
+    "businessPremium": {
+      "value": 128,
+      "title": "premiumBusinessCabin"
+    }
+  },
+  "passengerTypeList": {
+    "adult": {
+      "value": 0,
+      "priority": 0,
+      "type": "adult",
+      "title": "adult",
+      "description": "passengerAge.age12AndAbove",
+      "ageRange": [12, 100]
+    },
+    "child": {
+      "value": 1,
+      "priority": 1,
+      "type": "child",
+      "title": "child",
+      "description": "passengerAge.age2To12",
+      "ageRange": [2, 12]
+    },
+    "infant": {
+      "value": 2,
+      "priority": 2,
+      "type": "infant",
+      "title": "infant",
+      "description": "passengerAge.under2Years",
+      "ageRange": [0, 2]
+    }
+  },
+  "dateTimeFilterItemList": {
+    "earlyMorning": {
+      "key": "earlyMorning",
+      "title": "Dawn (00:01 to 08:00)",
+      "order": 1
+    },
+    "morning": {
+      "key": "morning",
+      "title": "Morning (08:01 to 12:00)",
+      "order": 2
+    },
+    "noon": {
+      "key": "noon",
+      "title": "Noon (12:01 to 16:00)",
+      "order": 3
+    },
+    "evening": {
+      "key": "evening",
+      "title": "Evening (16:01 to 20:00)",
+      "order": 4
+    },
+    "night": {
+      "key": "night",
+      "title": "Night (20:01 to 00:00)",
+      "order": 5
+    }
+  }
+}
+
+
+
+    
+    
+    
+    
