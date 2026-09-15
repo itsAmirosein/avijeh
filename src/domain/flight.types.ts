@@ -1,245 +1,244 @@
-
 export interface ApiMoney {
-  source: string
-  parsedValue: number
+  source: string;
+  parsedValue: number;
 }
-
 export interface ApiPriceDetail {
-  passengerType: PassengerTypeCode
-  discount: ApiMoney
-  totalPrice: ApiMoney
-  commission: ApiMoney
-  totalPriceIncludeCommission: ApiMoney
-  listPrice: ApiMoney
-  totalTax: ApiMoney
+  passengerType: PassengerTypeCode;
+  discount: ApiMoney;
+  totalPrice: ApiMoney;
+  commission: ApiMoney;
+  totalPriceIncludeCommission: ApiMoney;
+  listPrice: ApiMoney;
+  totalTax: ApiMoney;
 }
-
 export interface ApiBaggageAllowance {
-  adult: string | null
-  child: string | null
-  infant: string | null
-  description: string | null
+  adult: string | null;
+  child: string | null;
+  infant: string | null;
+  description: string | null;
 }
 
 export interface ApiFlightSegment {
-  departureAirportLocationCode: string
-  departureAirportLocationTitle: string
-  departureAirportLocationPersianTitle: string
-  departureCityTitle: string
-  departureCityPersianTitle: string
-  departureDateTime: string
-  arrivalAirportLocationCode: string
-  arrivalAirportLocationTitle: string
-  arrivalAirportLocationPersianTitle: string
-  arrivalCityTitle: string
-  arrivalCityPersianTitle: string
-  arrivalDateTime: string
-  duration: number
-  durationTime: string
-  flightNumber: string
-  fareClass: string
-  cabinType: string
-  airplaneTitle: string
-  airlineCode: string
-  airlineTitle: string
-  baggages: string
-  baggageAllowance: ApiBaggageAllowance | null
+  departureAirportLocationCode: string;
+  departureAirportLocationTitle: string;
+  departureAirportLocationPersianTitle: string;
+  departureCityTitle: string;
+  departureCityPersianTitle: string;
+  departureDateTime: string;
+  arrivalAirportLocationCode: string;
+  arrivalAirportLocationTitle: string;
+  arrivalAirportLocationPersianTitle: string;
+  arrivalCityTitle: string;
+  arrivalCityPersianTitle: string;
+  arrivalDateTime: string;
+  duration: number;
+  durationTime: string;
+  flightNumber: string;
+  fareClass: string;
+  cabinType: string;
+  airplaneTitle: string;
+  airlineCode: string;
+  airlineTitle: string;
+  baggages: string;
+  baggageAllowance: ApiBaggageAllowance | null;
 }
 
 export interface ApiFlightLeg {
-  departureAirportLocationCode: string
-  departureAirportLocationTitle: string
-  departureAirportLocationPersianTitle: string
-  departureCityTitle: string
-  departureCityPersianTitle: string
-  departureDateTime: string
-  arrivalAirportLocationCode: string
-  arrivalAirportLocationTitle: string
-  arrivalAirportLocationPersianTitle: string
-  arrivalCityTitle: string
-  arrivalCityPersianTitle: string
-  arrivalDateTime: string
-  elapsedTime: number
-  stops: number
-  remain: number | null
-  cabinType: string
-  flightsSegments: ApiFlightSegment[]
+  departureAirportLocationCode: string;
+  departureAirportLocationTitle: string;
+  departureAirportLocationPersianTitle: string;
+  departureCityTitle: string;
+  departureCityPersianTitle: string;
+  departureDateTime: string;
+  arrivalAirportLocationCode: string;
+  arrivalAirportLocationTitle: string;
+  arrivalAirportLocationPersianTitle: string;
+  arrivalCityTitle: string;
+  arrivalCityPersianTitle: string;
+  arrivalDateTime: string;
+  elapsedTime: number;
+  stops: number;
+  remain: number | null;
+  cabinType: string;
+  flightsSegments: ApiFlightSegment[];
 }
 
 export interface ApiItinerary {
-  id: string
-  discount: ApiMoney
-  discountPercent: ApiMoney
-  totalPrice: ApiMoney
-  totalPriceIncludeCommission: ApiMoney
-  commission: ApiMoney
-  totalTax: ApiMoney
-  listPrice: ApiMoney
-  currency: string
-  currencyTitle: string
-  isFeatured: boolean
-  providerTypeTitle: string | null
-  isFlightSaleable: boolean
-  flights: ApiFlightLeg[]
-  priceDetails: ApiPriceDetail[]
+  id: string;
+  discount: ApiMoney;
+  discountPercent: ApiMoney;
+  totalPrice: ApiMoney;
+  totalPriceIncludeCommission: ApiMoney;
+  commission: ApiMoney;
+  totalTax: ApiMoney;
+  listPrice: ApiMoney;
+  currency: string;
+  currencyTitle: string;
+  isFeatured: boolean;
+  providerTypeTitle: string | null;
+  isFlightSaleable: boolean;
+  flights: ApiFlightLeg[];
+  priceDetails: ApiPriceDetail[];
 }
 
 export interface ApiFlightSearchResponse {
-  httpStatusCode: number
-  statusCode: number
-  messages: string[]
+  httpStatusCode: number;
+  statusCode: number;
+  messages: string[];
   result: {
-    itineraries: ApiItinerary[]
-  }
+    itineraries: ApiItinerary[];
+  };
 }
 
-//domain ui
+//domain
 
-export type PassengerTypeCode = 0 | 1 | 2
+export type PassengerTypeCode = 0 | 1 | 2;
 
 export type TimeRangeKey =
-  | 'earlyMorning'
-  | 'morning'
-  | 'noon'
-  | 'evening'
-  | 'night'
+  | "earlyMorning"
+  | "morning"
+  | "noon"
+  | "evening"
+  | "night";
 
 export type CabinType =
-  | 'Economy'
-  | 'Business'
-  | 'First'
-  | 'Premium'
-  | 'PremiumEconomy'
-  | 'Comfort'
-  | 'EconomyPlus'
-  | 'BusinessPremium'
-  | (string & {})
+  | "Economy"
+  | "Business"
+  | "First"
+  | "Premium"
+  | "PremiumEconomy"
+  | "Comfort"
+  | "EconomyPlus"
+  | "BusinessPremium"
+  | (string & {});
 
 export interface Airline {
-  code: string
-  title: string
+  code: string;
+  title: string;
 }
 
 export interface FlightPoint {
-  airportCode: string
-  airportTitle: string
-  airportPersianTitle: string
-  cityTitle: string
-  cityPersianTitle: string
-  dateTime: string
+  airportCode: string;
+  airportTitle: string;
+  airportPersianTitle: string;
+  cityTitle: string;
+  cityPersianTitle: string;
+  dateTime: string;
 }
-
 
 export interface BaggageAllowance {
-  rawText: string
-  kilograms: number | null
+  rawText: string;
+  kilograms: number | null;
 }
-
 
 export interface FlightCardPricing {
-  listPrice: number | null
-  totalPrice: number
-  discountAmount: number
-  commissionAmount: number
-  totalPriceIncludeCommission: number
-  currency: string
-  currencyTitle: string
+  listPrice: number | null;
+  totalPrice: number | null;
+  discountAmount: number | null;
+  commissionAmount: number | null;
+  totalPriceIncludeCommission: number | null;
+  currency: string;
+  currencyTitle: string;
 }
 
-
 export interface FlightCardData {
-  isFeatured: boolean
-  airlines: Airline[]
-  flightNumbers: string[]
-  aircraftTypes: string[]
-  cabinTypes: CabinType[]
-  departure: FlightPoint
-  arrival: FlightPoint
-  totalDurationMinutes: number
-  stops: number
-  remainingSeats: number | null
-  providerTitle: string | null
-  minimumBaggage: BaggageAllowance
-  pricing: FlightCardPricing
+  isFeatured: boolean;
+  airlines: Airline[];
+  flightNumbers: string[];
+  aircraftTypes: string[];
+  cabinTypes: CabinType[];
+  departure: FlightPoint;
+  arrival: FlightPoint;
+  totalDurationMinutes: number;
+  stops: number;
+  remainingSeats: number | null;
+  providerTitle: string | null;
+  minimumBaggage: BaggageAllowance;
+  pricing: FlightCardPricing;
 }
 
 export interface FlightOption {
-  id: string
-  originalIndex: number
-  card: FlightCardData
+  id: string;
+  card: FlightCardData;
 }
 
+export type FlightOptionList = FlightOption[];
 
-export type FlightOptionList = FlightOption[]
-
-//filter type - state
+// filters
 
 export interface FilterOption<T extends string = string> {
-  value: T
-  label: string
-  iconUrl?: string
-  minimumPrice?: number
-  currencyTitle?: string
+  value: T;
+  label: string;
+  iconUrl?: string;
+  minimumPrice?: number;
+  currencyTitle?: string;
 }
 
-export type StopCategory = 'nonstop' | 'oneStop' | 'twoOrMoreStops'
-
+export type StopCategory = "nonstop" | "oneStop" | "twoOrMoreStops";
 export interface StopFilterOption extends FilterOption<StopCategory> {
-  minStops: number
-  maxStops?: number
+  stops: 0 | 1 | 2;
 }
 
 export interface FlightFilters {
-  departureTimeRanges: TimeRangeKey[]
-  arrivalTimeRanges: TimeRangeKey[]
-  airlineCodes: string[]
-  aircraftTypes: string[]
-  cabinTypes: CabinType[]
-  stopCategories: StopCategory[]
-  departureAirportCodes: string[]
-  arrivalAirportCodes: string[]
-  flightNumberQuery: string
+  departureTimeRanges: TimeRangeKey[];
+  airlineCodes: string[];
+  aircraftTypes: string[];
+  stopCategories: StopCategory[];
+  departureAirportCodes: string[];
+  arrivalAirportCodes: string[];
+  flightNumberQuery: string;
 }
 
 export interface FlightFilterOptions {
-  departureTimeRanges: FilterOption<TimeRangeKey>[]
-  arrivalTimeRanges: FilterOption<TimeRangeKey>[]
-  airlines: FilterOption[]
-  aircraftTypes: FilterOption[]
-  cabinTypes: FilterOption<CabinType>[]
-  stopCategories: StopFilterOption[]
-  departureAirports: FilterOption[]
-  arrivalAirports: FilterOption[]
+  departureTimeRanges: FilterOption<TimeRangeKey>[];
+  airlines: FilterOption[];
+  aircraftTypes: FilterOption[];
+  stopCategories: StopFilterOption[];
+  departureAirports: FilterOption[];
+  arrivalAirports: FilterOption[];
+  cabinTypes: FilterOption<CabinType>[];
 }
 
-// sort 
+// sort
 
 export type FlightSortKey =
-  | 'default'
-  | 'cheapest'
-  | 'mostExpensive'
-  | 'fastest'
-  | 'nearestDeparture'
+  | "default"
+  | "cheapest"
+  | "mostExpensive"
+  | "fastest"
+  | "nearestDeparture";
 
 export interface FlightSortOption {
-  value: FlightSortKey
-  label: string
+  value: FlightSortKey;
+  label: string;
 }
-
 
 export interface LoadMoreState {
-  visibleCount: number
+  visibleCount: number;
 }
 
-// page state 
+//state
 
-export type FlightSearchStatus = 'idle' | 'loading' | 'success' | 'error'
+export type FlightSearchStatus = "idle" | "loading" | "success" | "error";
 
 export interface FlightSearchState {
-  status: FlightSearchStatus
-  errorMessage: string | null
-  allFlights: FlightOptionList
-  filters: FlightFilters
-  sort: FlightSortKey
-  loadMore: LoadMoreState
+  status: FlightSearchStatus;
+  errorMessage: string | null;
+  allFlights: FlightOptionList;
+  filters: FlightFilters;
+  sort: FlightSortKey;
+  loadMore: LoadMoreState;
 }
+
+//constants
+
+export interface TimeRangeDefinition {
+  key: TimeRangeKey;
+  label: string;
+  start: string;
+  end: string;
+}
+
+export type StopOptionKey = "none" | "once" | "moreThanOne";
+
+export type StopOptions = Record<StopOptionKey, StopFilterOption>;
