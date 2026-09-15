@@ -7,19 +7,19 @@ import type {
   FlightOption,
   FlightOptionList,
   FlightPoint,
-} from './flight.types'
+} from "./flight.types";
 
-export function normalizeItinerary(
-  itinerary: ApiItinerary,
-): FlightOption {
-  const firstLeg = itinerary.flights[0]
-  const lastLeg = itinerary.flights[itinerary.flights.length - 1]
+export function normalizeItinerary(itinerary: ApiItinerary): FlightOption {
+  const firstLeg = itinerary.flights[0];
+  const lastLeg = itinerary.flights[itinerary.flights.length - 1];
 
   if (!firstLeg || !lastLeg) {
-    throw new Error(`Itinerary "${itinerary.id}" does not contain any flight legs.`)
+    throw new Error(
+      `Itinerary "${itinerary.id}" does not contain any flight legs.`,
+    );
   }
 
-  const segments = itinerary.flights.flatMap((leg) => leg.flightsSegments)
+  const segments = itinerary.flights.flatMap((leg) => leg.flightsSegments);
 
   return {
     id: itinerary.id,
@@ -44,13 +44,13 @@ export function normalizeItinerary(
       minimumBaggage: getMinimumBaggage(segments),
       pricing: getPricing(itinerary),
     },
-  }
+  };
 }
 
 export function normalizeItineraries(
   itineraries: ApiItinerary[],
 ): FlightOptionList {
-  return itineraries.map(normalizeItinerary)
+  return itineraries.map(normalizeItinerary);
 }
 
 function getDeparturePoint(leg: ApiFlightLeg): FlightPoint {
@@ -61,7 +61,7 @@ function getDeparturePoint(leg: ApiFlightLeg): FlightPoint {
     cityTitle: leg.departureCityTitle,
     cityPersianTitle: leg.departureCityPersianTitle,
     dateTime: leg.departureDateTime,
-  }
+  };
 }
 
 function getArrivalPoint(leg: ApiFlightLeg): FlightPoint {
@@ -72,69 +72,65 @@ function getArrivalPoint(leg: ApiFlightLeg): FlightPoint {
     cityTitle: leg.arrivalCityTitle,
     cityPersianTitle: leg.arrivalCityPersianTitle,
     dateTime: leg.arrivalDateTime,
-  }
+  };
 }
 
 function getTotalDurationMinutes(legs: ApiFlightLeg[]): number {
   return legs.reduce(
     (totalDuration, leg) => totalDuration + leg.elapsedTime,
     0,
-  )
+  );
 }
 
-function getMinimumBaggage(
-  segments: ApiFlightSegment[],
-): BaggageAllowance {
-  const allowances = segments.map(getSegmentBaggage)
+function getMinimumBaggage(segments: ApiFlightSegment[]): BaggageAllowance {
+  const allowances = segments.map(getSegmentBaggage);
   const allowancesWithWeight = allowances.filter(
     (allowance) => allowance.kilograms !== null,
-  )
+  );
 
   if (allowancesWithWeight.length > 0) {
     return allowancesWithWeight.reduce((minimum, current) =>
       current.kilograms! < minimum.kilograms! ? current : minimum,
-    )
+    );
   }
 
-  return allowances[0] ?? { rawText: '', kilograms: null }
+  return allowances[0] ?? { rawText: "", kilograms: null };
 }
 
-function getSegmentBaggage(
-  segment: ApiFlightSegment,
-): BaggageAllowance {
-  const rawText = getBaggageText(segment)
+function getSegmentBaggage(segment: ApiFlightSegment): BaggageAllowance {
+  const rawText = getBaggageText(segment);
 
   return {
     rawText,
     kilograms: parseKilograms(rawText),
-  }
+  };
 }
 
 function getBaggageText(segment: ApiFlightSegment): string {
-  const directBaggage = segment.baggages.trim()
+  const directBaggage = segment.baggages.trim();
 
-  if (directBaggage) return directBaggage
+  if (directBaggage) return directBaggage;
 
   return (
     segment.baggageAllowance?.adult ??
     segment.baggageAllowance?.description ??
-    ''
-  ).trim()
+    ""
+  ).trim();
 }
 
 //TODO: get this from api
 function parseKilograms(value: string): number | null {
   const normalizedDigits = value
-    .replace(/[۰-۹]/g, (digit) => String('۰۱۲۳۴۵۶۷۸۹'.indexOf(digit)))
-    .replace(/[٠-٩]/g, (digit) => String('٠١٢٣٤٥٦٧٨٩'.indexOf(digit)))
+    .replace(/[۰-۹]/g, (digit) => String("۰۱۲۳۴۵۶۷۸۹".indexOf(digit)))
+    .replace(/[٠-٩]/g, (digit) => String("٠١٢٣٤٥٦٧٨٩".indexOf(digit)));
 
-  const match = normalizedDigits.match(/\d+(?:[.,]\d+)?/)
+  const match = normalizedDigits.match(/\d+(?:[.,]\d+)?/);
 
-  if (!match) return null
+  if (!match) return null;
 
-  const kilograms = Number(match[0].replace(',', '.'))
+  const kilograms = Number(match[0].replace(",", "."));
 
-  return Number.isFinite(kilograms) ? kilograms : null
+  return Number.isFinite(kilograms) ? kilograms : null;
 }
 
 function getPricing(itinerary: ApiItinerary): FlightCardPricing {
@@ -150,5 +146,5 @@ function getPricing(itinerary: ApiItinerary): FlightCardPricing {
       itinerary.totalPriceIncludeCommission.parsedValue,
     currency: itinerary.currency,
     currencyTitle: itinerary.currencyTitle,
-  }
+  };
 }
