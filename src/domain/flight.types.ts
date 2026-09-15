@@ -2,6 +2,7 @@ export interface ApiMoney {
   source: string;
   parsedValue: number;
 }
+
 export interface ApiPriceDetail {
   passengerType: PassengerTypeCode;
   discount: ApiMoney;
@@ -11,6 +12,7 @@ export interface ApiPriceDetail {
   listPrice: ApiMoney;
   totalTax: ApiMoney;
 }
+
 export interface ApiBaggageAllowance {
   adult: string | null;
   child: string | null;
@@ -175,6 +177,7 @@ export interface FilterOption<T extends string = string> {
 }
 
 export type StopCategory = "nonstop" | "oneStop" | "twoOrMoreStops";
+
 export interface StopFilterOption extends FilterOption<StopCategory> {
   stops: 0 | 1 | 2;
 }
@@ -183,10 +186,11 @@ export interface FlightFilters {
   departureTimeRanges: TimeRangeKey[];
   airlineCodes: string[];
   aircraftTypes: string[];
+  cabinTypes: CabinType[];
   stopCategories: StopCategory[];
   departureAirportCodes: string[];
   arrivalAirportCodes: string[];
-  flightNumberQuery: string;
+  flightNumber: string;
 }
 
 export interface FlightFilterOptions {
@@ -199,7 +203,17 @@ export interface FlightFilterOptions {
   cabinTypes: FilterOption<CabinType>[];
 }
 
-// sort
+export interface ActiveFlightFilters {
+  departureTimeRanges: ReadonlySet<string>;
+  airlineCodes: ReadonlySet<string>;
+  aircraftTypes: ReadonlySet<string>;
+  cabinTypes: ReadonlySet<string>;
+  stopCategories: ReadonlySet<StopCategory>;
+  departureAirportCodes: ReadonlySet<string>;
+  arrivalAirportCodes: ReadonlySet<string>;
+  normalizedFlightNumber: string;
+}
+
 
 export type FlightSortKey =
   | "default"
@@ -208,7 +222,8 @@ export type FlightSortKey =
   | "fastest"
   | "nearestDeparture";
 
-export interface FlightSortOption {
+
+  export interface FlightSortOption {
   value: FlightSortKey;
   label: string;
 }

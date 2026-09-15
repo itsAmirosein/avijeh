@@ -2,6 +2,7 @@ import type {
   FlightSortOption,
   TimeRangeDefinition,
   StopOptions,
+  FlightFilters
 } from "@/domain/flight.types";
 
 export const ITEMS_PER_LOAD = 20;
@@ -52,4 +53,15 @@ export const STOP_OPTIONS: StopOptions = {
     label: "بیش از 2 توقف",
     stops: 2,
   },
+};
+
+export const INITIAL_FLIGHT_FILTERS: FlightFilters = {
+  departureTimeRanges: [],
+  airlineCodes: [],
+  aircraftTypes: [],
+  cabinTypes: [],
+  stopCategories: [],
+  departureAirportCodes: [],
+  arrivalAirportCodes: [],
+  flightNumber: "",
 };
