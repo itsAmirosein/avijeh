@@ -107,7 +107,7 @@ function getSegmentBaggage(segment: ApiFlightSegment): BaggageAllowance {
 }
 
 function getBaggageText(segment: ApiFlightSegment): string {
-  const directBaggage = segment.baggages.trim();
+  const directBaggage = segment.baggages?.trim() ?? "";
 
   if (directBaggage) return directBaggage;
 

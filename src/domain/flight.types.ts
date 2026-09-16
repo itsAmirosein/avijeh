@@ -41,7 +41,7 @@ export interface ApiFlightSegment {
   airplaneTitle: string;
   airlineCode: string;
   airlineTitle: string;
-  baggages: string;
+  baggages: string | null;
   baggageAllowance: ApiBaggageAllowance | null;
 }
 
