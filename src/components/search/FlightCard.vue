@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
+
 import {
   formatBaggage,
   formatCabinTypes,
@@ -11,6 +12,8 @@ import {
   getAirlineLogoUrl,
 } from "@/domain/flight-formatters";
 import type { FlightCardData } from "@/domain/flight.types";
+
+import { BADGE_STYLE, CART_ACTIONS } from "./constants";
 
 interface Props {
   flight: FlightCardData;
@@ -55,32 +58,6 @@ const hasBaggage = computed(() =>
   Boolean(props.flight.minimumBaggage.rawText.trim()),
 );
 const hasCabinType = computed(() => props.flight.cabinTypes.length > 0);
-
-const BADGE_STYLE =
-  "rounded-lg border border-border-default px-2 py-1 text-content-primary";
-
-const CART_ACTIONS = [
-  {
-    label: "قوانین مدیر سیستم",
-    value: "systemManegerRules",
-    action: undefined,
-  },
-  {
-    label: "جزئیات پرواز",
-    value: "flightDetails",
-    action: undefined,
-  },
-  {
-    label: "قوانین",
-    value: "rules",
-    action: undefined,
-  },
-  {
-    label: "جزئیات قیمت",
-    value: "AamountDetails",
-    action: undefined,
-  },
-];
 </script>
 
 <template>
