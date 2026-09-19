@@ -123,7 +123,7 @@ function getStopOptions(flights: FlightOption[]): StopFilterOption[] {
 
 function getStopOptionForCount(stops: number): StopFilterOption {
   if (stops === 0) {
-    return STOP_OPTIONS.once;
+    return STOP_OPTIONS.none;
   }
 
   if (stops === 1) {

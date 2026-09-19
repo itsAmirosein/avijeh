@@ -78,8 +78,10 @@ function handleChange(event: Event): void {
       </span>
     </span>
 
-    <span v-if="label || description" class="min-w-0">
-      <span v-if="label" class="block leading-5">{{ label }}</span>
+    <span v-if="label || description || $slots.label" class="min-w-0">
+      <slot name="label">
+        <span v-if="label" class="block leading-5">{{ label }}</span>
+      </slot>
       <span
         v-if="description"
         class="mt-0.5 block text-xs text-content-secondary"

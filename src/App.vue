@@ -1,18 +1,57 @@
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
+import { onMounted } from "vue";
 import FlightCard from "@/components/search/FlightCard.vue";
+import FlightFilterPanel from "@/components/search/FlightFilterPanel.vue";
 import { useFlightSearch } from "@/composables/use-flight-search";
 
-const { visibleFlights, loadFlights } = useFlightSearch();
-const flights = computed(() => visibleFlights.value);
+const {
+  state,
+  filterOptions,
+  visibleFlights,
+  totalResultsCount,
+  loadFlights,
+  setFilters,
+  clearFilters,
+} = useFlightSearch();
 
 onMounted(loadFlights);
 </script>
 
 <template>
   <main class="min-h-screen bg-background-primary-default p-4 sm:p-8">
-    <div v-if="flights.length" class="mx-auto max-w-5xl flex flex-col gap-y-2">
-      <FlightCard v-for="cart in flights" :flight="cart.card" />
+    <p v-if="state.status === 'loading'" class="text-content-secondary">
+      در حال دریافت پروازها...
+    </p>
+
+    <p v-else-if="state.status === 'error'" class="text-content-danger">
+      {{ state.errorMessage }}
+    </p>
+
+    <div v-else class="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
+      <section class="min-w-0">
+        <p class="mb-4 text-sm text-content-primary">
+          {{ totalResultsCount }} پرواز یافت شد
+        </p>
+
+        <div v-if="visibleFlights.length" class="space-y-3">
+          <FlightCard
+            v-for="flight in visibleFlights"
+            :key="flight.id"
+            :flight="flight.card"
+          />
+        </div>
+
+        <p v-else class="rounded-card bg-background-surface-default p-6 text-content-secondary shadow-card">
+          پروازی مطابق فیلترهای انتخاب‌شده پیدا نشد.
+        </p>
+      </section>
+
+      <FlightFilterPanel
+        :model-value="state.filters"
+        :filter-options="filterOptions"
+        @update:model-value="setFilters"
+        @clear="clearFilters"
+      />
     </div>
   </main>
 </template>
