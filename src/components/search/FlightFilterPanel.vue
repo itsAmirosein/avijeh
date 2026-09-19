@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { DeepReadonly } from "vue";
+import BaseAccordion from "@/components/ui/BaseAccordion.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import BaseInput from "@/components/ui/BaseInput.vue";
 import FlightFilterSection from "@/components/search/FlightFilterSection.vue";
@@ -63,54 +64,61 @@ function createMutableFilters(): FlightFilters {
       </BaseButton>
     </header>
 
-    <FlightFilterSection
-      title="زمان حرکت پرواز"
-      :options="filterOptions.departureTimeRanges"
-      :model-value="modelValue.departureTimeRanges"
-      @update:model-value="updateCheckboxFilter('departureTimeRanges', $event)"
-    />
+    <BaseAccordion title="زمان حرکت پرواز">
+      <FlightFilterSection
+        :options="filterOptions.departureTimeRanges"
+        :model-value="modelValue.departureTimeRanges"
+        @update:model-value="updateCheckboxFilter('departureTimeRanges', $event)"
+      />
+    </BaseAccordion>
 
-    <FlightFilterSection
-      title="ایرلاین"
-      :options="filterOptions.airlines"
-      :model-value="modelValue.airlineCodes"
-      @update:model-value="updateCheckboxFilter('airlineCodes', $event)"
-    />
+    <BaseAccordion title="ایرلاین">
+      <FlightFilterSection
+        :options="filterOptions.airlines"
+        :model-value="modelValue.airlineCodes"
+        @update:model-value="updateCheckboxFilter('airlineCodes', $event)"
+      />
+    </BaseAccordion>
 
-    <FlightFilterSection
-      title="تعداد توقف"
-      :options="filterOptions.stopCategories"
-      :model-value="modelValue.stopCategories"
-      @update:model-value="updateCheckboxFilter('stopCategories', $event)"
-    />
+    <BaseAccordion title="تعداد توقف">
+      <FlightFilterSection
+        :options="filterOptions.stopCategories"
+        :model-value="modelValue.stopCategories"
+        @update:model-value="updateCheckboxFilter('stopCategories', $event)"
+      />
+    </BaseAccordion>
 
-    <FlightFilterSection
-      title="فرودگاه مبدا"
-      :options="filterOptions.departureAirports"
-      :model-value="modelValue.departureAirportCodes"
-      @update:model-value="updateCheckboxFilter('departureAirportCodes', $event)"
-    />
+    <BaseAccordion title="فرودگاه مبدا">
+      <FlightFilterSection
+        :options="filterOptions.departureAirports"
+        :model-value="modelValue.departureAirportCodes"
+        @update:model-value="updateCheckboxFilter('departureAirportCodes', $event)"
+      />
+    </BaseAccordion>
 
-    <FlightFilterSection
-      title="فرودگاه مقصد"
-      :options="filterOptions.arrivalAirports"
-      :model-value="modelValue.arrivalAirportCodes"
-      @update:model-value="updateCheckboxFilter('arrivalAirportCodes', $event)"
-    />
+    <BaseAccordion title="فرودگاه مقصد">
+      <FlightFilterSection
+        :options="filterOptions.arrivalAirports"
+        :model-value="modelValue.arrivalAirportCodes"
+        @update:model-value="updateCheckboxFilter('arrivalAirportCodes', $event)"
+      />
+    </BaseAccordion>
 
-    <FlightFilterSection
-      title="نوع هواپیما"
-      :options="filterOptions.aircraftTypes"
-      :model-value="modelValue.aircraftTypes"
-      @update:model-value="updateCheckboxFilter('aircraftTypes', $event)"
-    />
+    <BaseAccordion title="نوع هواپیما">
+      <FlightFilterSection
+        :options="filterOptions.aircraftTypes"
+        :model-value="modelValue.aircraftTypes"
+        @update:model-value="updateCheckboxFilter('aircraftTypes', $event)"
+      />
+    </BaseAccordion>
 
-    <FlightFilterSection
-      title="نوع کابین"
-      :options="filterOptions.cabinTypes"
-      :model-value="modelValue.cabinTypes"
-      @update:model-value="updateCheckboxFilter('cabinTypes', $event)"
-    />
+    <BaseAccordion title="نوع کابین">
+      <FlightFilterSection
+        :options="filterOptions.cabinTypes"
+        :model-value="modelValue.cabinTypes"
+        @update:model-value="updateCheckboxFilter('cabinTypes', $event)"
+      />
+    </BaseAccordion>
 
     <div class="p-4">
       <BaseInput
