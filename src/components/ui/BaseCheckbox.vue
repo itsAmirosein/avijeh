@@ -3,6 +3,7 @@ import { computed, useId } from "vue";
 import { tv, type VariantProps } from "tailwind-variants";
 
 const checkboxVariants = tv({
+  base: "flex shrink-0 items-center justify-center rounded border border-border-strong bg-background-surface-default text-content-inverse transition-colors peer-checked:border-background-action-primary peer-checked:bg-background-action-primary peer-focus-visible:ring-2 peer-focus-visible:ring-border-accent peer-focus-visible:ring-offset-2 peer-disabled:bg-background-surface-subtle peer-disabled:opacity-50",
   variants: {
     size: {
       sm: "size-4 text-[0.625rem]",
@@ -66,13 +67,7 @@ function handleChange(event: Event): void {
       @change="handleChange"
     />
 
-    <span
-      :class="[
-        'flex shrink-0 items-center justify-center rounded border border-border-strong bg-background-surface-default text-content-inverse transition-colors peer-checked:border-background-action-primary peer-checked:bg-background-action-primary peer-focus-visible:ring-2 peer-focus-visible:ring-border-accent peer-focus-visible:ring-offset-2 peer-disabled:bg-background-surface-subtle peer-disabled:opacity-50',
-        checkboxVariants({ size }),
-      ]"
-      aria-hidden="true"
-    >
+    <span :class="checkboxVariants({ size })" aria-hidden="true">
       <span
         :class="[
           'transition-opacity',

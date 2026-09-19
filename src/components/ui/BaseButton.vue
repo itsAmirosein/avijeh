@@ -3,6 +3,7 @@ import { computed } from "vue";
 import { tv, type VariantProps } from "tailwind-variants";
 
 const buttonVariants = tv({
+  base: "cursor-pointer inline-flex items-center justify-center gap-2 rounded-control font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   variants: {
     variant: {
       primary:
@@ -53,11 +54,7 @@ const isDisabled = computed(() => props.disabled || props.loading);
   <button
     :type="type"
     :disabled="isDisabled"
-    :class="[
-      'cursor-pointer inline-flex items-center justify-center gap-2 rounded-control font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
-      buttonVariants({ variant, size }),
-      props.class,
-    ]"
+    :class="[buttonVariants({ variant, size }), props.class]"
   >
     <span
       v-if="loading"

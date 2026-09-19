@@ -3,6 +3,7 @@ import { computed, useId } from "vue";
 import { tv, type VariantProps } from "tailwind-variants";
 
 const inputVariants = tv({
+  base: "w-full rounded-control border bg-background-surface-default px-3 text-content-primary outline-none transition-colors placeholder:text-content-secondary focus:border-border-accent focus:ring-2 focus:ring-border-accent/20 disabled:cursor-not-allowed disabled:bg-background-surface-subtle disabled:text-content-secondary",
   variants: {
     size: {
       sm: "h-8 text-sm",
@@ -11,7 +12,8 @@ const inputVariants = tv({
     },
     state: {
       default: "border-border-default",
-      error: "border-content-danger focus:border-content-danger focus:ring-content-danger/20",
+      error:
+        "border-content-danger focus:border-content-danger focus:ring-content-danger/20",
     },
   },
   defaultVariants: {
@@ -50,7 +52,6 @@ const emit = defineEmits<{
 
 const generatedId = useId();
 const inputId = computed(() => props.id ?? generatedId);
-const descriptionId = computed(() => `${inputId.value}-description`);
 const hasError = computed(() => Boolean(props.error));
 
 function handleInput(event: Event): void {
@@ -73,18 +74,12 @@ function handleInput(event: Event): void {
       :id="inputId"
       :value="modelValue"
       :type="type"
-      :aria-invalid="hasError || undefined"
-      :aria-describedby="hint || error ? descriptionId : undefined"
-      :class="[
-        'w-full rounded-control border bg-background-surface-default px-3 text-content-primary outline-none transition-colors placeholder:text-content-secondary focus:border-border-accent focus:ring-2 focus:ring-border-accent/20 disabled:cursor-not-allowed disabled:bg-background-surface-subtle disabled:text-content-secondary',
-        inputVariants({ size, state: hasError ? 'error' : 'default' }),
-      ]"
+      :class="[inputVariants({ size, state: hasError ? 'error' : 'default' })]"
       @input="handleInput"
     />
 
     <p
       v-if="hint || error"
-      :id="descriptionId"
       class="mt-1 text-xs"
       :class="hasError ? 'text-content-danger' : 'text-content-secondary'"
     >
