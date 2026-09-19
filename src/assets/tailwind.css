@@ -27,3 +27,7 @@
   --shadow-card: 0 1px 3px rgb(16 24 40 / 10%);
   --ease-standard: 160ms ease;
 }
+
+body {
+  font-family: "IRANSansX", sans-serif;
+}

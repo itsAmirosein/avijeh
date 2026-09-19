@@ -124,7 +124,7 @@ export interface FlightPoint {
   airportTitle: string;
   airportPersianTitle: string;
   cityTitle: string;
-  cityPersianTitle: string;
+  cityPersianTitle: string; //TODO: do we need it?
   dateTime: string;
 }
 
@@ -214,7 +214,6 @@ export interface ActiveFlightFilters {
   normalizedFlightNumber: string;
 }
 
-
 export type FlightSortKey =
   | "default"
   | "cheapest"
@@ -222,8 +221,7 @@ export type FlightSortKey =
   | "fastest"
   | "nearestDeparture";
 
-
-  export interface FlightSortOption {
+export interface FlightSortOption {
   value: FlightSortKey;
   label: string;
 }

@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import BaseButton from "./components/ui/BaseButton.vue";
-import BaseCheckbox from "./components/ui/BaseCheckbox.vue";
-import BaseInput from "./components/ui/BaseInput.vue";
+import { computed, onMounted } from "vue";
+import FlightCard from "@/components/search/FlightCard.vue";
+import { useFlightSearch } from "@/composables/use-flight-search";
 
-const check = ref(false);
+const { visibleFlights, loadFlights } = useFlightSearch();
+const flights = computed(() => visibleFlights.value);
+
+onMounted(loadFlights);
 </script>
 
 <template>
-  <div class="flex w-full justify-center h-screen items-center gap-2">
-    <BaseInput />
-    <BaseButton loading text="button" size="lg" />
-    <BaseCheckbox v-model="check" />
-  </div>
+  <main class="min-h-screen bg-background-primary-default p-4 sm:p-8">
+    <div v-if="flights.length" class="mx-auto max-w-5xl flex flex-col gap-y-2">
+      <FlightCard v-for="cart in flights" :flight="cart.card" />
+    </div>
+  </main>
 </template>
-
-<style scoped></style>
