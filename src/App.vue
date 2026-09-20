@@ -2,6 +2,7 @@
 import { onMounted } from "vue";
 import FlightCard from "@/components/search/FlightCard.vue";
 import FlightFilterPanel from "@/components/search/FlightFilterPanel.vue";
+import FlightToolbar from "@/components/search/FlightToolbar.vue";
 import { useFlightSearch } from "@/composables/use-flight-search";
 
 const {
@@ -11,6 +12,7 @@ const {
   totalResultsCount,
   loadFlights,
   setFilters,
+  setSort,
   clearFilters,
 } = useFlightSearch();
 
@@ -29,9 +31,12 @@ onMounted(loadFlights);
 
     <div v-else class="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
       <section class="min-w-0">
-        <p class="mb-4 text-sm text-content-primary">
-          {{ totalResultsCount }} پرواز یافت شد
-        </p>
+        <FlightToolbar
+          class="mb-4"
+          :total-results="totalResultsCount"
+          :sort="state.sort"
+          @update:sort="setSort"
+        />
 
         <div v-if="visibleFlights.length" class="space-y-3">
           <FlightCard
