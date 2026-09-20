@@ -1,10 +1,10 @@
 import { computed, reactive, readonly } from "vue";
 import { fetchFlights } from "@/api/flight-api";
 import { ITEMS_PER_LOAD, INITIAL_FLIGHT_FILTERS } from "@/config/flight-config";
-import { filterFlights } from "@/domain/flight-filters";
-import { normalizeItineraries } from "@/domain/flight-normalizer";
-import { getFlightFilterOptions } from "@/domain/flight-selectors";
-import { sortFlights } from "@/domain/flight-sorter";
+import { filterFlights } from "@/domain/flighFilters";
+import { normalizeItineraries } from "@/domain/flightNormalizer";
+import { getFlightFilterOptions } from "@/domain/flightSelectors";
+import { sortFlights } from "@/domain/flightSorter";
 import type {
   FlightFilters,
   FlightSearchState,

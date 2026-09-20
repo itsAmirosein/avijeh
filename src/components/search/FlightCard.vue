@@ -10,7 +10,7 @@ import {
   formatStops,
   formatTime,
   getAirlineLogoUrl,
-} from "@/domain/flight-formatters";
+} from "@/domain/flightFormatters";
 import type { FlightCardData } from "@/domain/flight.types";
 
 import { BADGE_STYLE, CART_ACTIONS } from "./constants";

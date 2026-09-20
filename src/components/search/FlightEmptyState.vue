@@ -24,9 +24,8 @@ const emit = defineEmits<{
         stroke-width="1.5"
       />
     </svg>
-    <h1 class="mt-4 text-lg font-bold text-content-primary">
-      پروازی پیدا نشد
-    </h1>
+
+    <h1 class="mt-4 text-lg font-bold text-content-primary">پروازی پیدا نشد</h1>
     <p class="mt-2 text-sm text-content-secondary">
       با فیلترها یا شماره پرواز انتخاب‌شده، نتیجه‌ای وجود ندارد.
     </p>

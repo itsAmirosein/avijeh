@@ -7,7 +7,7 @@ import FlightFilterPanel from "@/components/search/FlightFilterPanel.vue";
 import FlightLoadMore from "@/components/search/FlightLoadMore.vue";
 import FlightLoadingState from "@/components/search/FlightLoadingState.vue";
 import FlightToolbar from "@/components/search/FlightToolbar.vue";
-import { useFlightSearch } from "@/composables/use-flight-search";
+import { useFlightSearch } from "@/composables/useFlightSearch";
 
 const {
   state,

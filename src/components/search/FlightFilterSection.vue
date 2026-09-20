@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BaseCheckbox from "@/components/ui/BaseCheckbox.vue";
-import { formatPrice } from "@/domain/flight-formatters";
+import { formatPrice } from "@/domain/flightFormatters";
 import type { FilterOption } from "@/domain/flight.types";
 
 interface Props {
