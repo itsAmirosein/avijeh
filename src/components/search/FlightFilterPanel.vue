@@ -20,10 +20,7 @@ const emit = defineEmits<{
   clear: [];
 }>();
 
-function updateCheckboxFilter(
-  key: CheckboxFilterKey,
-  values: string[],
-): void {
+function updateCheckboxFilter(key: CheckboxFilterKey, values: string[]): void {
   emit("update:modelValue", {
     ...createMutableFilters(),
     [key]: values,
@@ -54,10 +51,12 @@ function createMutableFilters(): FlightFilters {
 
 <template>
   <aside
-    class="w-full overflow-hidden rounded-card border border-border-default bg-background-surface-default shadow-card"
+    class="w-full h-fit overflow-hidden rounded-card border border-border-default bg-background-surface-default shadow-card"
     aria-label="فیلتر نتایج پرواز"
   >
-    <header class="flex items-center justify-between border-b border-border-default px-4 py-4">
+    <header
+      class="flex items-center justify-between border-b border-border-default px-4 py-4"
+    >
       <h2 class="text-base font-bold text-content-primary">فیلتر نتایج</h2>
       <BaseButton variant="ghost" size="sm" @click="emit('clear')">
         پاک کردن فیلترها
@@ -68,7 +67,9 @@ function createMutableFilters(): FlightFilters {
       <FlightFilterSection
         :options="filterOptions.departureTimeRanges"
         :model-value="modelValue.departureTimeRanges"
-        @update:model-value="updateCheckboxFilter('departureTimeRanges', $event)"
+        @update:model-value="
+          updateCheckboxFilter('departureTimeRanges', $event)
+        "
       />
     </BaseAccordion>
 
@@ -92,7 +93,9 @@ function createMutableFilters(): FlightFilters {
       <FlightFilterSection
         :options="filterOptions.departureAirports"
         :model-value="modelValue.departureAirportCodes"
-        @update:model-value="updateCheckboxFilter('departureAirportCodes', $event)"
+        @update:model-value="
+          updateCheckboxFilter('departureAirportCodes', $event)
+        "
       />
     </BaseAccordion>
 
@@ -100,7 +103,9 @@ function createMutableFilters(): FlightFilters {
       <FlightFilterSection
         :options="filterOptions.arrivalAirports"
         :model-value="modelValue.arrivalAirportCodes"
-        @update:model-value="updateCheckboxFilter('arrivalAirportCodes', $event)"
+        @update:model-value="
+          updateCheckboxFilter('arrivalAirportCodes', $event)
+        "
       />
     </BaseAccordion>
 

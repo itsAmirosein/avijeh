@@ -2,6 +2,7 @@
 import { onMounted } from "vue";
 import FlightCard from "@/components/search/FlightCard.vue";
 import FlightFilterPanel from "@/components/search/FlightFilterPanel.vue";
+import FlightLoadMore from "@/components/search/FlightLoadMore.vue";
 import FlightToolbar from "@/components/search/FlightToolbar.vue";
 import { useFlightSearch } from "@/composables/use-flight-search";
 
@@ -10,7 +11,9 @@ const {
   filterOptions,
   visibleFlights,
   totalResultsCount,
+  hasMore,
   loadFlights,
+  loadMore,
   setFilters,
   setSort,
   clearFilters,
@@ -29,7 +32,17 @@ onMounted(loadFlights);
       {{ state.errorMessage }}
     </p>
 
-    <div v-else class="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
+    <div
+      v-else
+      class="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[18rem_minmax(0,1fr)]"
+    >
+      <FlightFilterPanel
+        :model-value="state.filters"
+        :filter-options="filterOptions"
+        @update:model-value="setFilters"
+        @clear="clearFilters"
+      />
+
       <section class="min-w-0">
         <FlightToolbar
           class="mb-4"
@@ -46,17 +59,15 @@ onMounted(loadFlights);
           />
         </div>
 
-        <p v-else class="rounded-card bg-background-surface-default p-6 text-content-secondary shadow-card">
+        <FlightLoadMore v-if="hasMore" class="mt-6" @load-more="loadMore" />
+
+        <p
+          v-else
+          class="rounded-card bg-background-surface-default p-6 text-content-secondary shadow-card"
+        >
           پروازی مطابق فیلترهای انتخاب‌شده پیدا نشد.
         </p>
       </section>
-
-      <FlightFilterPanel
-        :model-value="state.filters"
-        :filter-options="filterOptions"
-        @update:model-value="setFilters"
-        @clear="clearFilters"
-      />
     </div>
   </main>
 </template>
