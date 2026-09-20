@@ -17,7 +17,7 @@ const {
   hasMore,
   loadFlights,
   loadMore,
-  setFilters,
+  setFilter,
   setSort,
   clearFilters,
 } = useFlightSearch();
@@ -44,7 +44,7 @@ onMounted(loadFlights);
       <FlightFilterPanel
         :model-value="state.filters"
         :filter-options="filterOptions"
-        @update:model-value="setFilters"
+        @update-filter="setFilter"
         @clear="clearFilters"
       />
 

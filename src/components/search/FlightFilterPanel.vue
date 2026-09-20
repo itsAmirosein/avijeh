@@ -4,48 +4,42 @@ import BaseAccordion from "@/components/ui/BaseAccordion.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import BaseInput from "@/components/ui/BaseInput.vue";
 import FlightFilterSection from "@/components/search/FlightFilterSection.vue";
-import type { FlightFilterOptions, FlightFilters } from "@/domain/flight.types";
+import type {
+  FlightFilterKey,
+  FlightFilterOptions,
+  FlightFilters,
+  FlightFilterUpdate,
+} from "@/domain/flight.types";
 
-type CheckboxFilterKey = Exclude<keyof FlightFilters, "flightNumber">;
+type CheckboxFilterKey = Exclude<FlightFilterKey, "flightNumber">;
 
 interface Props {
   modelValue: DeepReadonly<FlightFilters>;
   filterOptions: FlightFilterOptions;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 
 const emit = defineEmits<{
-  "update:modelValue": [value: FlightFilters];
+  "update-filter": [update: FlightFilterUpdate];
   clear: [];
 }>();
 
-function updateCheckboxFilter(key: CheckboxFilterKey, values: string[]): void {
-  emit("update:modelValue", {
-    ...createMutableFilters(),
-    [key]: values,
-  });
+function updateCheckboxFilter<Key extends CheckboxFilterKey>(
+  key: Key,
+  values: FlightFilters[Key],
+): void {
+  emit("update-filter", {
+    key,
+    value: values,
+  } as FlightFilterUpdate);
 }
 
 function updateFlightNumber(flightNumber: string): void {
-  emit("update:modelValue", {
-    ...createMutableFilters(),
-    flightNumber,
+  emit("update-filter", {
+    key: "flightNumber",
+    value: flightNumber,
   });
-}
-
-/** Props readonly هستند؛ قبل از emit، مالکیت آرایه‌های state جدید را به parent می‌دهیم. */
-function createMutableFilters(): FlightFilters {
-  return {
-    departureTimeRanges: [...props.modelValue.departureTimeRanges],
-    airlineCodes: [...props.modelValue.airlineCodes],
-    aircraftTypes: [...props.modelValue.aircraftTypes],
-    cabinTypes: [...props.modelValue.cabinTypes],
-    stopCategories: [...props.modelValue.stopCategories],
-    departureAirportCodes: [...props.modelValue.departureAirportCodes],
-    arrivalAirportCodes: [...props.modelValue.arrivalAirportCodes],
-    flightNumber: props.modelValue.flightNumber,
-  };
 }
 </script>
 

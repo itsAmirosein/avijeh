@@ -193,6 +193,16 @@ export interface FlightFilters {
   flightNumber: string;
 }
 
+export type FlightFilterKey = keyof FlightFilters;
+
+/** A single, type-safe change requested by the filter UI. */
+export type FlightFilterUpdate = {
+  [Key in FlightFilterKey]: {
+    key: Key;
+    value: FlightFilters[Key];
+  };
+}[FlightFilterKey];
+
 export interface FlightFilterOptions {
   departureTimeRanges: FilterOption<TimeRangeKey>[];
   airlines: FilterOption[];

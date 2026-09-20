@@ -7,6 +7,7 @@ import { getFlightFilterOptions } from "@/domain/flightSelectors";
 import { sortFlights } from "@/domain/flightSorter";
 import type {
   FlightFilters,
+  FlightFilterUpdate,
   FlightSearchState,
   FlightSortKey,
 } from "@/domain/flight.types";
@@ -60,9 +61,11 @@ export function useFlightSearch() {
     }
   }
 
-  function setFilters(nextFilters: FlightFilters): void {
-    // finding a better way than clone
-    state.filters = cloneFilters(nextFilters);
+  function setFilter(update: FlightFilterUpdate): void {
+    state.filters = {
+      ...state.filters,
+      [update.key]: update.value,
+    } as FlightFilters;
     resetVisibleCount();
   }
 
@@ -74,7 +77,8 @@ export function useFlightSearch() {
   }
 
   function clearFilters(): void {
-    setFilters(createInitialFilters());
+    state.filters = createInitialFilters();
+    resetVisibleCount();
   }
 
   function loadMore(): void {
@@ -90,13 +94,11 @@ export function useFlightSearch() {
   return {
     state: readonly(state),
     filterOptions,
-    filteredFlights,
-    sortedFlights,
     visibleFlights,
     totalResultsCount,
     hasMore,
     loadFlights,
-    setFilters,
+    setFilter,
     setSort,
     clearFilters,
     loadMore,
@@ -107,7 +109,6 @@ function createInitialFilters(): FlightFilters {
   return cloneFilters(INITIAL_FLIGHT_FILTERS);
 }
 
-// Find a better way to keep the state immutable.
 function cloneFilters(filters: FlightFilters): FlightFilters {
   return {
     departureTimeRanges: [...filters.departureTimeRanges],

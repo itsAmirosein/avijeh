@@ -1,24 +1,24 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="Value extends string">
 import BaseCheckbox from "@/components/ui/BaseCheckbox.vue";
 import { formatPrice } from "@/domain/flightFormatters";
 import type { FilterOption } from "@/domain/flight.types";
 
 interface Props {
-  options: readonly FilterOption[];
-  modelValue: readonly string[];
+  options: readonly FilterOption<Value>[];
+  modelValue: readonly Value[];
 }
 
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  "update:modelValue": [value: string[]];
+  "update:modelValue": [value: Value[]];
 }>();
 
-function isSelected(value: string): boolean {
+function isSelected(value: Value): boolean {
   return props.modelValue.includes(value);
 }
 
-function updateSelection(value: string, selected: boolean): void {
+function updateSelection(value: Value, selected: boolean): void {
   if (selected) {
     emit("update:modelValue", [...props.modelValue, value]);
     return;
@@ -30,7 +30,7 @@ function updateSelection(value: string, selected: boolean): void {
   );
 }
 
-function getMinimumPrice(option: FilterOption): string | null {
+function getMinimumPrice(option: FilterOption<Value>): string | null {
   return formatPrice(option.minimumPrice ?? null, option.currencyTitle ?? "");
 }
 </script>
